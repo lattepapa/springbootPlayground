@@ -1,4 +1,12 @@
+com/fastercamp/springboot/p1/e03_while.java
+ com.fastercamp.springboot.p1.e03_while
+com/fastercamp/springboot/p1/e02_switch.java
+ com.fastercamp.springboot.p1.e02_switch
 com/fastercamp/springboot/web/HelloController.java
  com.fastercamp.springboot.web.HelloController
+com/fastercamp/springboot/p1/e01_if.java
+ com.fastercamp.springboot.p1.e01_if
 com/fastercamp/springboot/Application.java
  com.fastercamp.springboot.Application
+com/fastercamp/springboot/p1/e04_for.java
+ com.fastercamp.springboot.p1.e04_for
