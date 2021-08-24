@@ -1,0 +1,2 @@
+com/fastercamp/springboot/web/HelloControllerTest.java
+ com.fastercamp.springboot.web.HelloControllerTest
