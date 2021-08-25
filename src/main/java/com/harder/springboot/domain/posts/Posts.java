@@ -1,4 +1,5 @@
 package com.harder.springboot.domain.posts;
+import com.harder.springboot.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,7 @@ import javax.persistence.Id;
 // JPA 어노테이션으로, 아래 클래스가 테이블과 링크될 클래스(즉, Entity 클래스)임을 명시해준다
 // CamelCase인 이름은 underscore_case(_)로 테이블 이름을 매칭해준다
 // Entity 클래스에서는 절대로 Setter 메소드를 만들지 않는다. -> Bean 규약으로 인한 Getter/Setter 남발을 억제해주는 기능
-public class Posts {
+public class Posts extends BaseTimeEntity {
 
     @Id
     // 해당 테이블의 PK 필드를 나타내준다
