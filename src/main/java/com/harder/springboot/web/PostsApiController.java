@@ -21,13 +21,15 @@ public class PostsApiController {
         return postsService.save(requestDto);
     }
     // @RequestBody 어노테이션은 해당 클래스를 객체로 생성해준다. 대신, 각 변수별로 데이터를 저장하는 것은 불가능하다
-    // @RequestParam 어노테이션은 반면에 각 변수별로 데이터를 저장할 수 있게 해주는 대신, 클래스를 객체로 생성하는 것은 불가능하다
+    // 반면에 @RequestParam 어노테이션은 각 변수별로 데이터를 저장할 수 있게 해주는 대신, 클래스를 객체로 생성하는 것은 불가능하다
+    // 또한, @RequestParam 어노테이션은 http://localhost?index=1&page=2 와 같이 게시판에서 페이지 및 검색 정보를 함께 전달하는데 활용된다
 
     // 2. 데이터 수정기능
     @PutMapping("/api/v1/posts/{id}")
     public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto) {
         return postsService.update(id, requestDto);
     }
+    // @PathVariable 어노테이션은 http://localhost/index/1 과 같이 RESTAPI에서의 값 호출과 활용에 활용된다
 
     // 3. 데이터 조회기능
     @GetMapping("/api/v1/posts/{id}")
