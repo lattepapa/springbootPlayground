@@ -18,4 +18,6 @@ public class PostsApiController {
     public Long save(@RequestBody PostsSaveRequestDto requestDto) {
         return postsService.save(requestDto);
     }
+    // @RequestBody 어노테이션은 해당 클래스를 객체로 생성해준다. 대신, 각 변수별로 데이터를 저장하는 것은 불가능하다
+    // @RequestParam 어노테이션은 반면에 각 변수별로 데이터를 저장할 수 있게 해주는 대신, 클래스를 객체로 생성하는 것은 불가능하다
 }

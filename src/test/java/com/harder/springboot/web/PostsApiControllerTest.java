@@ -23,6 +23,8 @@ public class PostsApiControllerTest {
     private int port;
 
     @Autowired
+    // Singleton 패턴, 즉, Heap memory space에 하나의 객체만 저장하고, 이 객체에 클라이언트들이 스레드로 연결할 수 있도록 도와준다
+    // 일반적으로는 Heap memory space에 각 클라이언트들의 스레드 개수만큼의 객체들이 저장된다.(그만큼 메모리 자원 소모 발생)
     private TestRestTemplate restTemplate;
 
     @Autowired
