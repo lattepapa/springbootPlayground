@@ -1,5 +1,7 @@
 package com.fastercamp.springboot.web;
+import com.fastercamp.springboot.web.dto.HelloResponseDto;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -13,4 +15,12 @@ public class HelloController {
     public String hello() {
         return "hello";
     }
+
+    @GetMapping("/hello/dto")
+    // 롬복 라이브러리가 적용된 ResponseDto를 사용
+    public HelloResponseDto helloDto(@RequestParam("name") String name, @RequestParam("amount") int amount) {
+        return new HelloResponseDto(name, amount);
+    }
+    // @RequestParam은 외부에서 API로 넘긴 파라미터를 가져오는 어노테이션
+    // 즉, 외부에서 johndoe(@RequestParam("name")) 라고 넘긴 파라미터를 johndoe (String name) 에 저장해준다
 }
