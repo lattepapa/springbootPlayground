@@ -1,6 +1,7 @@
 package com.harder.springboot.service.posts;
 import com.harder.springboot.domain.posts.Posts;
 import com.harder.springboot.domain.posts.PostsRepository;
+import com.harder.springboot.web.dto.PostsListResponseDto;
 import com.harder.springboot.web.dto.PostsResponseDto;
 import com.harder.springboot.web.dto.PostsSaveRequestDto;
 import com.harder.springboot.web.dto.PostsUpdateRequestDto;
@@ -8,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
