@@ -1,13 +1,21 @@
 package com.harder.springboot.web;
 
+import com.harder.springboot.service.posts.PostsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+@RequiredArgsConstructor
 @Controller
 public class IndexController {
 
+    private final PostsService postsService;
+
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
+        // Model 라이브러리를 통해, postsService.findAllDesc()의 결과를 posts로 index.mustache에 전달해준다
+        model.addAttribute("posts", postsService.findAllDesc());
         return "index";
         // mustache 템플릿 엔진에 의해 String 값의 뒤에 .mustache 확장자가 붙어서
         // src > main > resources > templates 경로에 파일로 전환 및 저장되고, 이것을 View Resolver가 처리
