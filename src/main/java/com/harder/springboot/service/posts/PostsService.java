@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.stream.Collectors;
+
 @RequiredArgsConstructor
 @Service
 public class PostsService {
@@ -34,5 +36,13 @@ public class PostsService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
 
         return new PostsResponseDto(entity);
+    }
+
+    @Transactional(readOnly = true)
+    // readOnly = true 옵션은 트랜잭션 범위는 유지하되, 조회 기능만 활용하게 하여 조회 속도를 개선시켜준다
+    public List<PostsListResponseDto> findAllDesc() {
+        return postsRepository.findAllDesc().stream().map(PostsListResponseDto::new).collect(Collectors.toList());
+        // .map(PostsListResponseDto::new)는 사실 .map(posts -> new PostsListResponseDto(posts))와 같다
+        // 즉, postsRepository 결과로 넘어온 Posts의 Stream을, map을 통해 PostsListResponseDto 변환 및 List로 반환해준다
     }
 }
