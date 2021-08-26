@@ -41,15 +41,15 @@
 - Repository Layer : DB에 접근하는 영역(Data Access Object, 즉, Dao 영역)
 
 ### 스프링 웹 계층에 중첩된 영역
-- Dtos : Data Transfer Object는 계층간 데이터 교환을 위한 객체이며, Web과 Service Layer에 중첩
+- Dto : Data Transfer Object는 계층간 데이터 교환을 위한 객체이며, Web과 Service Layer에 중첩
 - Domain Model : 개발대상을 모든 사람이 동일한 관점에서 이해할 수 있도록 단순화된 것(즉, Entity)이며, Service와 Repository Layer에 중첩 -> 비즈니스 로직 처리
 
 ## 프로젝트에서의 계층 구조
-### Domain Layer(첫번째로 만든다)
+### Repository Layer(첫번째로 만든다)
 - 경로 : src > main > java > {package} > domain > posts > Posts.java(class) 및 PostsRepository.java(interface)
-- 내용 :
-** Entity가 형성되는 곳이다.
-** 여기서는 "Posts"라는 클래스를 만들어서 궁극적으로 DB에 "posts"라는 Entity로 링크해준다.
+- 내용 :  
+** Entity가 형성되는 곳이다.  
+** 여기서는 "Posts"라는 클래스를 만들어서 궁극적으로 DB에 "posts"라는 Entity로 링크해준다.  
 
 ```java
 // Posts.java (클래스)
@@ -104,8 +104,8 @@ public interface PostsRepository extends JpaRepository<Posts, Long> {}
 
 ### Web Layer(두번째로 만든다)
 - 경로 : src > main > java > {package} > web > dto > PostsApiController.java
-- 내용 :
-** 컨트롤러가 세팅되는 곳이다. 컨트롤러는 뷰 템플릿과 서비스를 중개한다.
+- 내용 :  
+** 컨트롤러가 세팅되는 곳이다. 컨트롤러는 뷰 템플릿과 서비스를 중개한다.  
 ** 여기서는 DB에 데이터를 다룰 수 있는 각종 CRUD용 API가 정의된다.  
 &nbsp;&nbsp;&nbsp; ➡ "requestDto"라는 클래스를 객체로 만들어, "postsService"라는 서비스가 이 객체를 Entity에 반영하게 해준다.
 
@@ -130,9 +130,9 @@ public class PostsApiController {
 
 ### Service Layer(세번째로 만든다)
 - 경로 : src > main > java > {package} > service > posts > PostsService.java
-- 내용 :
-** 서비스가 세팅되는 곳이다. 서비스는 컨트롤러와 도메인을 중개한다.
-** 여기서는 "PostsService"라는 클래스로 만들어지는 서비스가 "requestDto"라는 Entity에 컨트롤러의 CRUD API를 적용해준다.
+- 내용 :  
+** 서비스가 세팅되는 곳이다. 서비스는 컨트롤러와 도메인을 중개한다.  
+** 여기서는 "PostsService"라는 클래스로 만들어지는 서비스가 "requestDto"라는 Entity에 컨트롤러의 CRUD API를 적용해준다.  
 
 ```java
 import ...
@@ -152,10 +152,10 @@ public class PostsService {
 
 ### Dto(마지막으로 만든다)
 - 경로 : src > main > java > {package} > web > dto > PostsSaveRequestDto.java
-- 내용 :
-** Data Transfer Object란 계층 간 데이터 교환을 위한 객체(Java Beans)를 의미한다.
-** DB에서 꺼낸 값을 임의로 변경할 필요가 없으므로, 일반적으로 Dto는 Getter 이외의 내부 로직이나 메서드를 갖지 않는다.
-** 특히, 롬복에서 제공하는 @Builder 어노테이션을 활용하여 Entity의 각 필드들을 변수 순서에 맞게 저장 및 운반한다.
+- 내용 :  
+** Data Transfer Object란 계층 간 데이터 교환을 위한 객체(Java Beans)를 의미한다.  
+** DB에서 꺼낸 값을 임의로 변경할 필요가 없으므로, 일반적으로 Dto는 Getter 이외의 내부 로직이나 메서드를 갖지 않는다.  
+** 특히, 롬복에서 제공하는 @Builder 어노테이션을 활용하여 Entity의 각 필드들을 변수 순서에 맞게 저장 및 운반한다.  
 
 ```java
 import ...
