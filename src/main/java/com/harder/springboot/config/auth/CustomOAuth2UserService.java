@@ -1,5 +1,7 @@
 package com.harder.springboot.config.auth;
 
+import com.harder.springboot.config.auth.dto.OAuthAttributes;
+import com.harder.springboot.config.auth.dto.SessionUser;
 import com.harder.springboot.domain.user.User;
 import com.harder.springboot.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
