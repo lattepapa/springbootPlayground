@@ -31,5 +31,6 @@ dependencies {
     compile('com.h2database:h2') // in-memory 방식의 RDBMS : 어플리케이션 재시작 시 초기화되므로 테스트에 많이 활용된다
     compile('org.springframework.boot:spring-boot-starter-mustache') // mustache 템플릿 엔진
     compile('org.springframework.boot:spring-boot-starter-oauth2-client') // SpringSecurity 설정
+    compile('org.springframework.session:spring-session-jdbc') // spring-session-jdbc 설정
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
