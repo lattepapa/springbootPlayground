@@ -15,7 +15,8 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 @Component
 public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver {
-
+    // 이 HandlerMethodArgumentResolver는 반드시
+    // WebConfig.class의 WebMvcConfigurer의 addArgumentResolvers()를 통해서만 등록될 수 있다!!
     private final HttpSession httpSession;
 
     @Override
