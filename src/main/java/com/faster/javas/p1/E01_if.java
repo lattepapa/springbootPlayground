@@ -1,6 +1,6 @@
 package com.faster.javas.p1;
 
-public class e01_if {
+public class E01_if {
 
     public static void main(String[] args) {
         int age = 12;

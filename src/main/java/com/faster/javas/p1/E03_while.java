@@ -2,7 +2,7 @@ package com.faster.javas.p1;
 
 import java.util.Scanner;
 
-public class e03_while {
+public class E03_while {
 
     public static void main(String[] args) {
 

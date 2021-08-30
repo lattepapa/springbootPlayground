@@ -1,6 +1,6 @@
 package com.faster.javas.p1;
 
-public class e04_for {
+public class E04_for {
 
     public static void main(String[] args) {
 

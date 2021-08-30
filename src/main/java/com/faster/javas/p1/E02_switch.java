@@ -2,7 +2,7 @@ package com.faster.javas.p1;
 
 import java.util.Scanner;
 
-public class e02_switch {
+public class E02_switch {
 
     public static void main(String[] args) {
 
