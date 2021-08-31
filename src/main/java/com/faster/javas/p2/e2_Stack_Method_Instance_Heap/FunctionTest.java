@@ -1,4 +1,4 @@
-package com.faster.javas.p2.e2;
+package com.faster.javas.p2.e2_Stack_Method_Instance_Heap;
 
 public class FunctionTest {
     // 1. int형 결과값을 반환하는 함수

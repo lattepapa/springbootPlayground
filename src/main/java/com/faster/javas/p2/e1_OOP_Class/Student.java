@@ -1,4 +1,4 @@
-package com.faster.javas.p2.e1;
+package com.faster.javas.p2.e1_OOP_Class;
 
 public class Student {
     int studentNumber;
