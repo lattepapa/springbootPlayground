@@ -11,5 +11,10 @@ public class SubjectTest {
         studentKim.setEnglishSubject("영어", 80);
         studentKim.setMathSubject("수학", 70);
         studentKim.showSubjectScores();
+
+        Student2 studentPark = new Student2(300, "Park");
+        studentPark.setGeology("지리", 60);
+        studentPark.setScience("과학", 100);
+        studentPark.showGPA();
     }
 }
