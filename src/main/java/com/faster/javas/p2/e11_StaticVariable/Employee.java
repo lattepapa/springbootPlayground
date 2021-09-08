@@ -2,7 +2,7 @@ package com.faster.javas.p2.e11_StaticVariable;
 
 public class Employee {
     // 클래스변수
-    public static int serialNum = 1000;
+    private static int serialNum = 1000;
 
     // 속성
     private int employeeId;
@@ -17,6 +17,10 @@ public class Employee {
     }
 
     // Getter and Setter
+    public static int getSerialNum() {
+        return serialNum;
+    }
+
     public int getEmployeeId() {
         return employeeId;
     }
