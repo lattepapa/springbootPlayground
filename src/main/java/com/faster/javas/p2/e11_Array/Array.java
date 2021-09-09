@@ -1,6 +1,4 @@
-package com.faster.javas.p2.e11_ArrayList;
-
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
+package com.faster.javas.p2.e11_Array;
 
 public class Array {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package com.faster.javas.p2.e11_ArrayList;
+package com.faster.javas.p2.e11_Array;
 
 public class CharArray {
     public static void main(String[] args) {
