@@ -7,7 +7,7 @@ public class Student {
     public int studentId;
     public String studentName;
 
-    // 수강과목 속성은 배열(Subject 클래스  활용)로 갖는다
+    // 수강과목 속성은 Subject 클래스의 인스턴스들을 그 엘리먼트로 하는 배열이다
     public ArrayList<Subject> subjectList;
 
     // 매개변수를 활용한 생성자
