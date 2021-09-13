@@ -17,6 +17,7 @@ public class BookTest {
 //        com.faster.javas.p2.e12_ObjectArray.Book@15db9742 퇴마록, 이우혁
 //        com.faster.javas.p2.e12_ObjectArray.Book@6d06d69c 신조협려, 김용
 //        com.faster.javas.p2.e12_ObjectArray.Book@7852e922 월야환담, 홍정훈
-//        com.faster.javas.p2.e12_ObjectArray.Book@4e25154f 싸드, 김진명
+//        com.faster.javas.p2.e12_ObjectArray.Book@4e25154f
+//        싸드, 김진명
     }
 }
