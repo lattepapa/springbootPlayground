@@ -7,8 +7,8 @@ public class Student {
     public int studentId;
     public String studentName;
 
-    // 학생은 기본적으로 수강과목을 배열로 갖는다
-    ArrayList<Subject> subjectList;
+    // 수강과목 속성은 배열(Subject 클래스  활용)로 갖는다
+    public ArrayList<Subject> subjectList;
 
     // 매개변수를 활용한 생성자
     public Student(int studentId, String studentName) {
