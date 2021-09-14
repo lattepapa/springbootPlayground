@@ -1,4 +1,4 @@
-package com.faster.javas.p3.e2_Override;
+package com.faster.javas.p3.e3_Polymorphism;
 
 public class Customer {
     protected int customerId;
@@ -10,7 +10,7 @@ public class Customer {
     public Customer(int customerId, String customerName) {
         this.customerId = customerId;
         this.customerName = customerName;
-        level = "Silver";
+        level = "Sivler";
         savingRatio = 0.01;
     }
 
@@ -20,7 +20,7 @@ public class Customer {
     }
 
     public String showMembershipInfo() {
-        return customerName + " 회원님: " + level + "(" + mileage + "P)";
+        return customerName + "\t회원님: " + level + "(" + mileage + "P)";
     }
 
     public int getCustomerId() {
