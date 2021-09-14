@@ -34,8 +34,3 @@ public class Book {
         System.out.println(title + ", " + author);
     }
 }
-
-// 객체 배열 : 배열은 선언과 동시에 각 엘리먼트마다 4byte씩 할당받지만, 객체 배열은 엘리먼트(객체)가 들어갈 메모리 주소만 할당만 된다.
-//          -> 즉, Class[] objArr = new Class[length]; 로 객체 배열을 만들어도
-//              일단 해당 객체 배열의 엘리먼트들은 null값이므로, 해당 엘리먼트들에 대한 초기화가 필요하다. 즉,
-//              objArr[index] = new Class(args, args, ...); 로 하나씩 값을 초기화해야 한다.

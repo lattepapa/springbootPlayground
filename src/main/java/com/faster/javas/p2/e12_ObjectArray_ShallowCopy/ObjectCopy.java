@@ -41,7 +41,3 @@ public class ObjectCopy {
 //        com.faster.javas.p2.e12_ObjectArray_ShallowCopy.Book@4e25154f 짜라스투라는 말했다, 니체
     }
 }
-
-// 객체 배열 복사하기 : 자바에서 제공하는 기본 메서드
-//                  -> System.arrayCopy(src, srcPos, dest, destPos, length)
-//                  -> 얕은 복사 : 객체 주소값만 복사하는 것이므로, 한쪽에서 엘리먼트 수정 시 다른 쪽에서도 같이 수정 됨

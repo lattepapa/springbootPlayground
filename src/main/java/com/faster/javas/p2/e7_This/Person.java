@@ -36,7 +36,3 @@ public class Person {
         System.out.println(person2); // com.faster.javas.p2.e8_This.Person@2a139a55
     }
 }
-
-// this : 생성된 인스턴스 자신의 메모리(= 참조변수 = 힙 주소값)를 가리키는 것
-//      (1) 생성자에서 또 다른 생성자를 호출할 때 사용할 수 있음
-//      (2) 자신의 주소(= 참조변수)를 반환할 수 있음

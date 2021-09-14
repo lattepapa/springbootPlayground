@@ -13,8 +13,3 @@ public class EmployeeTest {
         System.out.println(employeeKim.getEmployeeId()); // 1002
     }
 }
-
-// 메모리 사용 와꾸
-// 데이터영역                스택                          힙
-// serialNum        studentLee(메인함수가 호출)    studentLee(인스턴스)
-//                  studentKim(메인함수가 호출)    studentKim(인스턴스)
