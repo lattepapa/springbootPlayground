@@ -41,6 +41,9 @@ public class AnimalTest {
         test.moveAnimal(hAnimal);
         test.moveAnimal(tAnimal);
         test.moveAnimal(eAnimal);
+        //    사람이 두 발로 걷습니다
+        //    호랑이가 네 발로 걷습니다
+        //    독수리가 날개짓을 합니다
 
         // 다형성 테스트 결과증명
         // 상속(extends) 및 재정의(override)한 각 인스턴스의 메서드들과 결과 동일할까?
@@ -52,14 +55,40 @@ public class AnimalTest {
         for(Animal animal : animalList) {
             animal.move();
         }
+        //    사람이 두 발로 걷습니다
+        //    호랑이가 네 발로 걷습니다
+        //    독수리가 날개짓을 합니다
+
+        test.testDownCasting(animalList);
+        //    사람이 책을 읽어요
+        //    호랑이가 사냥을 해요
+        //    독수리가 활강을 해요
     }
+
+
+
 
     // 여러 하위 클래스들이 함께 사용할, 다형성(polymorphism) 구현 메서드
     public void moveAnimal(Animal animal) {
         animal.move();
     }
 
-//    사람이 두 발로 걷습니다
-//    호랑이가 네 발로 걷습니다
-//    독수리가 날개짓을 합니다
+    // 다운캐스팅 구현 메서드
+    public void testDownCasting(ArrayList<Animal> list) {
+        for(int i = 0; i < list.size(); i++) {
+            Animal animal = list.get(i);
+            if(animal instanceof Human) {
+                Human human = (Human)animal;
+                human.readBook();
+            } else if(animal instanceof Tiger) {
+                Tiger tiger = (Tiger)animal;
+                tiger.hunt();
+            } else if(animal instanceof Eagle) {
+                Eagle eagle = (Eagle)animal;
+                eagle.dive();
+            } else {
+                System.out.println("지원되지 않는 타입입니다.");
+            }
+        }
+    }
 }
