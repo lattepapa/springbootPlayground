@@ -1,190 +1,96 @@
-# Learning Java SpringBoot
+# Java Springboot Playground
 
-## 아키텍처
+![Lang](https://img.shields.io/badge/lang-java-orange)
+![Framework](https://img.shields.io/badge/framework-springboot-green)
 
-(1) Java 8
+![IDE](https://img.shields.io/badge/ide-intellij-blue)
+![Hydra](https://img.shields.io/badge/hail-hydra-red)
 
-(2) Gradle 4.10.2
-- [Preferences] Build and run using: IntelliJ IDEA
-- [Preferences] Run tests using: IntelliJ IDEA
-- [Shell] ./gradle wrapper --gradle-version 4.10.2
+이 공간은 전적으로 초심자가 Java Springboot을 배워가는 과정을 기록한 곳 입니다.
 
-(3) Lombok 1.18.8
-- [build.gradle] dependencies { compile('org.projectlombok:lombok') }
-- [Plugins] lombok install
+Java 프로그래밍에 관한 대부분의 사실들은 이곳에서 보고 들은 내용들을 토대로 하였습니다.  
+https://fastcampus.co.kr/dev_online_javaend  
+https://jojoldu.tistory.com
 
-## 요구사항 분석
+## 개발환경 세팅
 
-(1) 게시판 기능
-- 게시글 조회
-- 게시글 등록
-- 게시글 수정
-- 게시글 삭제
+### jenv 설치
 
-(2) 회원 기능
-- 구글/네이버 로그인
-- 로그인한 사용자 글 작성 권한
-- 본인 작성 글에 대한 권한 관리
-
-## 스프링 웹 계층 구조
-
-### API를 만들기 위해서는 총 3개의 클래스가 필요
-- Request 데이터를 받을 Dto
-- API 요청을 받을 Controller
-- 트랜잭션, 도메인(주문,구매 등등 서비스기능) 간 순서를 보장하는 Service
-
-### 이에 따른 스프링 웹 계층 구분
-![spring-web-app-architecture](https://user-images.githubusercontent.com/67884699/130718994-901ab8d2-2c66-4885-b437-2ceb6b0b682f.png)
-
-- Web Layer : @Controller와 JSP/Freemaker, @Filter, @ControllerAdvice 등의 뷰 템플릿 영역
-- Service Layer : @Service, @Transactional 등의 서비스 영억(Controller와 Dao의 중간 영역)
-- Repository Layer : DB에 접근하는 영역(Data Access Object, 즉, Dao 영역)
-
-### 스프링 웹 계층에 중첩된 영역
-- Dto : Data Transfer Object는 계층간 데이터 교환을 위한 객체이며, Web과 Service Layer에 중첩
-- Domain Model : 개발대상을 모든 사람이 동일한 관점에서 이해할 수 있도록 단순화된 것(즉, Entity)이며, Service와 Repository Layer에 중첩 -> 비즈니스 로직 처리
-
-## 프로젝트에서의 계층 구조
-### Repository Layer(첫번째로 만든다)
-- 경로 : src > main > java > {package} > domain > posts > Posts.java(class) 및 PostsRepository.java(interface)
-- 내용 :  
-** Entity가 형성되는 곳이다.  
-** 여기서는 "Posts"라는 클래스를 만들어서 궁극적으로 DB에 "posts"라는 Entity로 링크해준다.  
-
-```java
-// Posts.java (클래스)
-
-import ...
-
-@Getter
-// 롬복 어노테이션으로, 클래스 내 모든 필드의 Getter 메소드를 자동으로 생성해준다
-@NoArgsConstructor
-// 롬복 어노테이션으로, 기본 생성자를 자동으로 추가해준다 -> 여기선 public Posts() {} 를 자동 추가해준다
-@Entity
-// JPA 어노테이션으로, 아래 클래스가 테이블과 링크될 클래스(즉, Entity 클래스)임을 명시해준다
-// CamelCase인 이름은 underscore_case(_)로 테이블 이름을 매칭해준다
-// Entity 클래스에서는 절대로 Setter 메소드를 만들지 않는다. -> Bean 규약으로 인한 Getter/Setter 남발을 억제해주는 기능
-public class Posts {
-
-    @Id
-    // 해당 테이블의 PK 필드를 나타내준다
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // PK 생성 규칙을 내타내준다
-    private Long id;
-
-    @Column(length = 500, nullable = false)
-    // @Column 어노테이션을 명시하지 않아도 테이블 컬럼으로 매칭되나, 디폴트값 외 추가 변경이 있는 경우 어노테이션 사용
-    private String title;
-
-    @Column(columnDefinition = "TEXT", nullable = false)
-    private String content;
-
-    private String author;
-
-    @Builder
-    // 해당 클래스의 빌더 패턴 클래스를 생성해준다 -> 만약 생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
-    public Posts(String title, String content, String author) {
-        this.title = title;
-        this.content = content;
-        this.author = author;
-    }
-}
+1. homebrew를 설치합니다.  
+```shell
+% /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```  
+2. jenv를 설치합니다.  
+```shell
+% brew install jenv
 ```
+3. (추가)oh-my-ZSH를 설치 및 테마 세팅을 합니다.
+```shell
+% sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-```java
-// PostsRepository.java (인터페이스)
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
-public interface PostsRepository extends JpaRepository<Posts, Long> {}
-// JpaRepository는 MyBatis에서의 Dao와 같은 DB Layer 접근자(interface)이다
-// 즉, Posts 클래스로 DB 접근할 수 있게 해준다
-// 인터페이스 선언 속에 extends JpaRepository<Entity 클래스 이름, 해당 Entity의 PK의 타입> 를 삽입하면 CRUD 메소드가 자동 생성된다
+% open -e ~/.zshrc
 ...
-```
-
-### Web Layer(두번째로 만든다)
-- 경로 : src > main > java > {package} > web > dto > PostsApiController.java
-- 내용 :  
-** 컨트롤러가 세팅되는 곳이다. 컨트롤러는 뷰 템플릿과 서비스를 중개한다.  
-** 여기서는 DB에 데이터를 다룰 수 있는 각종 CRUD용 API가 정의된다.  
-&nbsp;&nbsp;&nbsp; ➡ "requestDto"라는 클래스를 객체로 만들어, "postsService"라는 서비스가 이 객체를 Entity에 반영하게 해준다.
-
-```java
-import ...
-
-@RequiredArgsConstructor
-// PostsApiController 클래스의 의존성 관계가 변경될 때마다 생성자 코드를 수정하지 않고,
-// final이 선언된 모든 필드를 인자값으로 하는 생성자를 자동 생성하기 위해 사용
-// 컨트롤러는 Service layer의 내용을 인자값으로 해야하므로 final을 통해 postsService 선언
-@RestController
-// PostsApiController 클래스의 컨트롤러가 JSON을 반환할 수 있도록 만들어준다
-public class PostsApiController {
-	private final PostsService postsService;
-	@PostMapping("/api/v1/posts")
-	public Long save(@RequestBody PostsSaveRequestDto requestDto) {
-		// @RequestBody 어노테이션은 requestDto 클래스를 객체로 생성해준다
-		return postsService.save(requestDto);
-	}
-}
+# 아래부분의 값을 원하는 테마로 수정
+ZSH_THEME="agnoster"
 ...
+
+% git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
+
+% echo "source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
 ```
 
-### Service Layer(세번째로 만든다)
-- 경로 : src > main > java > {package} > service > posts > PostsService.java
-- 내용 :  
-** 서비스가 세팅되는 곳이다. 서비스는 컨트롤러와 도메인을 중개한다.  
-** 여기서는 "PostsService"라는 클래스로 만들어지는 서비스가 "requestDto"라는 Entity에 컨트롤러의 CRUD API를 적용해준다.  
+### Open JDK 8 설치
+1. AdoptOpenJDK 8 설치
+```shell
+$ brew tap AdoptOpenJDK/openjdk
 
-```java
-import ...
-
-@RequiredArgsConstructor
-// 서비스는 Domain layer의 내용을 인자값으로 해야하므로 final을 통해 postsRepository 선언
-@Service
-// 
-public class PostsService {
-	private final PostsRepository postsRepository;
-	@Transactional
-	public Long save(PostsSaveRequestDto requestDto) {
-		return postsService.save(requestDto.toEntity()).getId();
-	}
-}
-...
+$ brew install --cask adoptopenjdk8
 ```
 
-### Dto(마지막으로 만든다)
-- 경로 : src > main > java > {package} > web > dto > PostsSaveRequestDto.java
-- 내용 :  
-** Data Transfer Object란 계층 간 데이터 교환을 위한 객체(Java Beans)를 의미한다.  
-** DB에서 꺼낸 값을 임의로 변경할 필요가 없으므로, 일반적으로 Dto는 Getter 이외의 내부 로직이나 메서드를 갖지 않는다.  
-** 특히, 롬복에서 제공하는 @Builder 어노테이션을 활용하여 Entity의 각 필드들을 변수 순서에 맞게 저장 및 운반한다.  
-
-```java
-import ...
-
-@Getter
-@NoArgsConstructor
-public class PostsSaveRequestDto {
-
-    private String title;
-    private String content;
-    private String author;
-
-    @Builder
-    public PostsSaveRequestDto(String title, String content, String author) {
-        this.title = title;
-        this.content = content;
-        this.author = author;
-    }
-
-    public Posts toEntity() {
-        return Posts.builder()
-                .title(title)
-                .content(content)
-                .author(author)
-                .build();
-    }
-}
-...
+2. jenv와 AdoptOpenJDK 8 연결
+```shell
+$ jenv add /Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
 ```
+
+만약 다음과 같은 문제가 생긴다면, 이에 맞게 jenv 설치경로에 직접 AdoptOpenJDK 8 정보를 추가한 후 해당 버전을 글로벌 버전으로 사용하도록 설정합니다.([참고](https://cozzin.tistory.com/64))
+
+```shell
+$ jenv add /Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
+ln: /Users/user/.jenv/versions/openjdk64-1.8.0.292: No such file or directory
+
+$ mkdir -p ~/.jenv/versions
+
+$ jenv add /Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
+
+$ jenv global 8
+```
+이제 다음과 같이 Open JDK 8 버전이 정상적으로 설치되어 글로벌에서 사용되고 있음이 확인됩니다.
+```shell
+$ jenv versions
+  system
+* 1.8 (set by /Users/siwoobaek/.jenv/version)
+  1.8.0.292
+  openjdk64-1.8.0.292
+
+$ java -version
+openjdk version "1.8.0_292"
+OpenJDK Runtime Environment (AdoptOpenJDK)(build 1.8.0_292-b10)
+OpenJDK 64-Bit Server VM (AdoptOpenJDK)(build 25.292-b10, mixed mode)
+
+$ /usr/libexec/java_home -V
+Matching Java Virtual Machines (1):
+    1.8.0_292 (x86_64) "AdoptOpenJDK" - "AdoptOpenJDK 8" /Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
+/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
+```
+
+### IDE 설치
+
+저는 **IntelliJ Ultimate Edition**을 구독 중입니다. 참고로, Java Springboot를 위한 무료 IDE로는 IntelliJ Community Edition이나 STS(Eclipse)도 있습니다.
+
+## 프로젝트 구성
+
+### 패키지 구조
+- `aws.springbuls` : OAuth 2.0을 활용한 간단한 스프링부트 게시판 CRUD
+- `fast.driller` : Java Springboot 기본 문법구조 및 알고리즘을 포함한 스프링부트 프로젝트 꾸러미
+
+패키지 구조는 위와 같이 크게 두 가지로 나뉘어져 있습니다. 해당 패키지로 구현되는 모습은 각각의 README.md 파일을 통해 확인할 수 있습니다.
