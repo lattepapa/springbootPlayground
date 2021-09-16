@@ -36,18 +36,7 @@ public class AnimalTest {
         Animal tAnimal = new Tiger();
         Animal eAnimal = new Eagle();
 
-        // 다형성 테스트
-        AnimalTest test = new AnimalTest();
-        test.moveAnimal(hAnimal);
-        test.moveAnimal(tAnimal);
-        test.moveAnimal(eAnimal);
-        //    사람이 두 발로 걷습니다
-        //    호랑이가 네 발로 걷습니다
-        //    독수리가 날개짓을 합니다
-
-        // 다형성 테스트 결과증명
-        // 상속(extends) 및 재정의(override)한 각 인스턴스의 메서드들과 결과 동일할까?
-        // Yes!
+        // 상속(extends) 및 재정의(override) 테스트
         ArrayList<Animal> animalList = new ArrayList<>();
         animalList.add(hAnimal);
         animalList.add(tAnimal);
@@ -55,6 +44,17 @@ public class AnimalTest {
         for(Animal animal : animalList) {
             animal.move();
         }
+        //    사람이 두 발로 걷습니다
+        //    호랑이가 네 발로 걷습니다
+        //    독수리가 날개짓을 합니다
+
+
+
+        // 다형성 테스트
+        AnimalTest test = new AnimalTest();
+        test.moveAnimal(hAnimal);
+        test.moveAnimal(tAnimal);
+        test.moveAnimal(eAnimal);
         //    사람이 두 발로 걷습니다
         //    호랑이가 네 발로 걷습니다
         //    독수리가 날개짓을 합니다
