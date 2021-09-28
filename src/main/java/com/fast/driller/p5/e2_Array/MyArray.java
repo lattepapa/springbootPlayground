@@ -37,7 +37,7 @@ public class MyArray {
             return;
         }
         if(count >= ARRAY_SIZE) {
-            System.out.println("Array Length Error");
+            System.out.println("Not Enough Memory");
             return;
         }
 
