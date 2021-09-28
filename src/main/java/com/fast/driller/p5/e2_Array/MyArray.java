@@ -76,6 +76,37 @@ public class MyArray {
 
     // 6. 빈배열 확인 메서드
     public boolean isEmpty() {
-        return true;
+        if(count == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    // 7. 특정위치(position)의 항목 확인 메서드
+    public int getElement(int position) {
+        if(position < 0 || position > count - 1) {
+            System.out.println("Error : 현재 배열의 길이는 " + count);
+            return ERROR_NUM;
+        }
+        return intArr[position];
+    }
+
+    // 8. 배열 출력 메서드
+    public void printAll() {
+        if(count == 0) {
+            System.out.println("Does not exist");
+            return;
+        }
+        for(int i = 0; i < count; i++) {
+            System.out.println(intArr[i]);
+        }
+    }
+
+    // 9. 전체 삭제 메서드
+    public void removeAll() {
+        for(int i = 0; i < count; i++) {
+            intArr[i] = 0;
+        }
+        count = 0;
     }
 }
