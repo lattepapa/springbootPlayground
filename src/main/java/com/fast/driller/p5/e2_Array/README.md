@@ -7,95 +7,86 @@
 ## 1. 배열생성 메서드
 ```java
 public class MyArray {
-	int[] intArr;
-	int count;
+	public int[] intArr;
+	public int count;
 	public int ARRAY_SIZE;
 	public static final int ERROR = -999999999;
 	
-	public setArray(int size) {
+	public MyArray() {
+		count = 0;
+		ARRAY_SIZE = 10;
+		intArr = new int[ARRAY_SIZE];
+	}
+	
+	public MyArray(int size) {
 		count = 0;
 		ARRAY_SIZE = size;
-		intArr = new int[size];
+		intArr = new int[ARRAY_SIZE];
 	}
 }
 ```
 
 ## 2. 항목추가 메서드
 ```java
-public class MyArray {
-	int[] intArr;
-	int count;
-	public int ARRAY_SIZE;
-	public static final int ERROR = -999999999;
-	
-	public addElement(int el) {
-		if(count >= ARRAY_SIZE) {
-			System.out.println("Not Enough Memory");
-			return;
-		}
-		intArr[count++] = el;
+public void addElement(int el) {
+	if(count > ARRAY_SIZE) {
+		System.out.println("Memory Overhead);
 	}
+	intArr[count++] = el;
 }
 ```
 
-## 3. 특정인덱스(position)에 항목삽입 메서드
+## 3. 특정인덱스에 항목삽입 메서드
 ```java
-public class MyArray {
-	int[] intArr;
-	int count;
-	public int ARRAY_SIZE;
-	public static final int ERROR = -999999999;
-	
-	public insertElement(int position, int el) {
-		if(position < 0 || position >= count) {
-			System.out.println("Scope Error");
-			return;
-		}
-		if(count >= ARRAY_SIZE) {
-			System.out.println("Not Enough Memory");
-			return;
-		}
-		int i;
-		for(i = position; i > position - 1; i--) {
-			intArr[i+1] = intArr[i];
-		}
-		intArr[position] = el;
-		count++;
+public void insertElement(int index, int el) {
+	if(index < 0 || index > count) {
+		return;
 	}
+	for(int i = count - 1; i >= index; i--) {
+		intArr[i+1] = intArr[i];
+	}
+	count++;
+	intArr[index] = el;
 }
 ```
 
-## 4. 특정인덱스(position)의 항목제거 메서드
+## 4. 특정인덱스의 항목제거 메서드
 ```java
-public class MyArray {
-	int[] intArr;
-	int count;
-	public int ARRAY_SIZE;
-	public static final int ERROR = -999999999;
-	
-	public removeElement(int position) {
-		int ret = ERROR;
-		if(isEmpty()) {
-			System.out.println("Array is empty");
-			return;
-		}
-		if(position < 0 || position > count - 1) {
-			return ret;
-		}
-		ret = intArr[position];
-		for(int i = position; i < count - 1; i++) {
-			intArr[i] = intArr[i+1];
-		}
-		count--;
-		return ret;
+public int removeElement(int index) {
+	if(index < 0 || index >= count) {
+		return ERROR;
 	}
-	
-	public boolean isEmpty() {
-		return true;
+	int result = intArr[index];
+	for(int i = index; i < count - 1; i++) {
+		intArr[i] = intArr[i+1];
 	}
-	
-	public int getSize() {
-		return count;
+	count--;
+	return result;
+}
+```
+
+## 5. 특정인덱스의 항목조회 메서드
+```java
+public int getElement(int index) {
+	if(index < 0 || index >= count) {
+		return ERROR;
+	}
+	return intArr[index];
+}
+```
+
+## 6. 배열 크기 확인 메서드
+```java
+public int getSize() {
+	return count;
+}
+```
+
+## 7. 배열 순회 메서드
+```java
+public void traverse() {
+	for(int i = 0; i < count; i++) {
+		System.out.println(intArr[i]);
 	}
 }
 ```
